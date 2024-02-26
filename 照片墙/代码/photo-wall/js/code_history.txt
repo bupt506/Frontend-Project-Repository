@@ -1,0 +1,68 @@
+1、
+// script.js
+
+// 获取上传按钮和拖放区域元素
+const uploadButton = document.querySelector('.upload-button');
+const dropArea = document.querySelector('.drop-area');
+const fileInput = document.getElementById('file-upload');
+
+// 添加事件监听器
+uploadButton.addEventListener('click', handleUpload);
+dropArea.addEventListener('dragover', handleDragOver);
+dropArea.addEventListener('drop', handleDrop);
+fileInput.addEventListener('change', handleFileInput);
+
+// 处理上传操作
+function handleUpload(event) {
+    event.preventDefault();
+    fileInput.click();
+}
+
+// 处理拖放区域的拖放操作
+function handleDragOver(event) {
+    event.preventDefault();
+}
+
+// 处理拖放区域放置文件操作
+function handleDrop(event) {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
+    handleFiles(files);
+}
+
+// 处理文件输入框选择文件操作
+function handleFileInput(event) {
+    const files = event.target.files;
+    handleFiles(files);
+}
+
+// 处理选择的文件
+function handleFiles(files) {
+    // 清空拖放区域的提示文本
+    dropArea.innerHTML = '';
+
+    // 遍历文件数组
+    for (const file of files) {
+        // 创建预览图像元素
+        const img = document.createElement('img');
+        img.classList.add('preview-image');
+        img.file = file;
+        dropArea.appendChild(img);
+
+        // 使用 FileReader 对象读取文件数据
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// 上传文件至服务器（示例代码，需根据实际情况修改）
+function uploadFile(file) {
+    // 在这里编写将文件上传至服务器的逻辑
+    console.log('上传文件:', file.name);
+}
+
+
+

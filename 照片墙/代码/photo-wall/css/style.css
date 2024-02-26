@@ -1,0 +1,98 @@
+/* style.css */
+
+/* 主体样式 */
+body {
+    background-color: rgba(0, 0, 0, 0.5); /* 设置外部页面背景颜色为半透明的黑色 */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f8f9fa; /* 设置内部方框的背景颜色为浅灰色 */
+    color: #212529; /* 设置字体颜色为黑色 */
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.upload-container {
+    text-align: center;
+}
+
+/* 上传按钮样式 */
+.upload-button {
+    display: inline-block;
+    cursor: pointer;
+    border: 2px dashed #adb5bd; /* 设置上传按钮边框颜色为灰色 */
+    padding: 10px 20px;
+    font-size: 20px;
+    color: #495057; /* 设置上传按钮文字颜色为深灰色 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+}
+
+.upload-button:hover {
+    border-color: #212529; /* 悬停时边框颜色变为黑色 */
+    color: #212529; /* 悬停时文字颜色变为黑色 */
+}
+
+.upload-button span {
+    font-size: inherit;
+    line-height: 0;
+}
+
+/* 照片预览区域样式 */
+.drop-area {
+    margin-top: 20px;
+    border: 2px dashed #adb5bd; /* 设置拖放区域边框颜色为灰色 */
+    padding: 20px;
+    text-align: center;
+    background-color: #f1f3f5; /* 设置拖放区域背景颜色为淡灰色 */
+}
+
+/* 九宫格容器样式 */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 10px;
+    margin-top: 20px;
+    overflow-y: auto; /* 添加滚动条 */
+    max-height: 400px; /* 设置最大高度 */
+}
+
+/* 预览图片容器样式 */
+.preview-container {
+    position: relative;
+}
+
+/* 预览图片样式 */
+.preview-image {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ced4da; /* 设置预览图片边框颜色为浅灰色 */
+    border-radius: 5px;
+    transition: all 0.3s ease; /* 添加过渡效果 */
+}
+
+.preview-image:hover {
+    transform: scale(1.05); /* 悬停时放大图片 */
+}
+
+/* 删除按钮样式 */
+.delete-button {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    color: #212529; /* 设置删除按钮颜色为黑色 */
+    cursor: pointer;
+    transition: all 0.3s ease; /* 添加过渡效果 */
+}
+
+.delete-button:hover {
+    color: #dc3545; /* 悬停时删除按钮颜色变为红色 */
+}

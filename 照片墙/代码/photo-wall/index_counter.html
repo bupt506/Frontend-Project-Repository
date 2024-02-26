@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timer App</title>
+</head>
+<body>
+
+<h1>Timer App</h1>
+
+<div>
+  <label for="duration">Duration (seconds):</label>
+  <input type="number" id="duration" min="1" value="10">
+  <button onclick="startTimer()">Start Timer</button>
+  <button onclick="stopTimer()">Stop Timer</button>
+</div>
+
+<div id="timer"></div>
+
+<script>
+let durationInput = document.getElementById('duration');
+let timerDisplay = document.getElementById('timer');
+let timeoutId;
+
+function startTimer() {
+  let duration = parseInt(durationInput.value);
+  let startTime = Date.now();
+  
+  function updateTimer() {
+    let elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+    let remainingTime = duration - elapsedTime;
+    
+    if (remainingTime <= 0) {
+      clearInterval(timeoutId);
+      timerDisplay.textContent = 'Timer expired!';
+    } else {
+      timerDisplay.textContent = `Time remaining: ${remainingTime} seconds`;
+    }
+  }
+  
+  updateTimer();
+  timeoutId = setInterval(updateTimer, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timeoutId);
+  timerDisplay.textContent = 'Timer stopped';
+}
+</script>
+
+</body>
+</html>
