@@ -3,11 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Snake Game</title>
-<link rel="stylesheet" href="styles.css">
+<title>贪吃蛇游戏</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    #gameArea {
+        width: 600px;
+        height: 600px;
+        border: 10px solid #ccc;
+        background-color: rgb(148, 106, 106);
+        position: relative;
+    }
+    .snake {
+        width: 20px;
+        height: 20px;
+        background-color: black;
+        position: absolute;
+    }
+    #snakeHead {
+        background-color: rgb(136, 19, 19);
+    }
+</style>
 </head>
 <body>
-<div id="gameArea"></div>
-<script src="script.js"></script>
+<div id="gameArea">
+    <div id="snakeHead" class="snake" style="left: 40px; top: 40px;"></div>
+    <div class="snake" style="left: 20px; top: 40px;"></div>
+    <div class="snake" style="left: 0px; top: 40px;"></div>
+</div>
 </body>
+<!--<script src="Snacke_script.js"></script>-->
+<script>
+    var gameArea = document.querySelector("#gameArea");
+    var snake = gameArea.querySelectorAll(".snake");
+    document.addEventListener('keydown', changeDirection);
+    //方向全局变量，默认向右运动
+    var gLeft = 20;
+    var gTop = 0;
+
+    function changeDirection(event){
+        var keyID = event.key;
+        //上移
+        if(keyID === 'w' && gTop !== 20){
+            gTop = -20;
+            gLeft = 0;
+        }
+        if(keyID === 's' && gTop !== -20){
+            gTop = 20; 
+            gLeft = 0;  
+        }
+        if(keyID === 'a' && gLeft !== 20){
+            gLeft = -20;
+            gTop = 0;
+        }
+        if(keyID === 'd' && gLeft !== -20){
+            gLeft = 20;
+            gTop = 0;
+        }
+    }
+
+    function move() {
+    // 获取蛇头元素
+    var snakeHead = snake[0];
+
+    // 获取蛇头的旧位置
+    var oldLeft = parseInt(snakeHead.style.left || 0, 10);
+    var oldTop = parseInt(snakeHead.style.top || 0, 10);
+
+    // 计算蛇头的新位置
+    var newLeft = oldLeft + gLeft;
+    var newTop = oldTop + gTop;
+
+    // 将蛇头移动到新位置
+    snakeHead.style.left = newLeft + "px";
+    snakeHead.style.top = newTop + "px";
+
+    // 循环移动蛇身
+    for (var i = 1; i < snake.length; i++) {
+        var currentSnakePart = snake[i];
+
+        // 获取当前蛇身元素的位置
+        var currentLeft = parseInt(currentSnakePart.style.left || 0, 10);
+        var currentTop = parseInt(currentSnakePart.style.top || 0, 10);
+
+        // 将当前蛇身元素移动到前一个蛇身元素的位置
+        currentSnakePart.style.left = oldLeft + "px";
+        currentSnakePart.style.top = oldTop + "px";
+
+        // 更新旧位置为当前位置，用于下一个蛇身元素移动
+        oldLeft = currentLeft;
+        oldTop = currentTop;
+    }
+}
+
+
+    var gameInterval = setInterval(move, 100);
+</script>
 </html>
